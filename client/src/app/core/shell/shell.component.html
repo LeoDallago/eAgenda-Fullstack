@@ -8,10 +8,21 @@
       </span>
     </mat-toolbar>
     <mat-nav-list>
-      <a *ngFor="let link of links" mat-list-item [routerLink]="link.rota">
-        <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
-        {{ link.titulo }}
-      </a>
+      <ng-container *ngIf="!usuarioAutenticado">
+
+        <a *ngFor="let link of links" mat-list-item [routerLink]="link.rota">
+          <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
+          {{ link.titulo }}
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="usuarioAutenticado">
+
+        <a *ngFor="let link of authLinks" mat-list-item [routerLink]="link.rota">
+          <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
+          {{ link.titulo }}
+        </a>
+      </ng-container>
 
     </mat-nav-list>
   </mat-sidenav>
@@ -21,6 +32,15 @@
         (click)="drawer.toggle()">
         <mat-icon aria-label="Ícone ativador da barra lateral">menu</mat-icon>
       </button>
+
+      <span *ngIf="usuarioAutenticado">
+        <span>Bem-vindo {{usuarioAutenticado.nome}}</span>
+
+        <button (click)="logoutEfetuado()" mat-stroked-button>
+          Logout
+        </button>
+      </span>
+
       <span *ngIf="isHandset$ | async" class="d-flex align-items-center gap-2 ms-auto">
         <mat-icon>note_alt</mat-icon>
         e-Agenda
