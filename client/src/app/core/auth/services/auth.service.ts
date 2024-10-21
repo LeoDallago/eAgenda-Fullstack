@@ -7,6 +7,8 @@ import { AutenticarUsuarioViewModel, RegistrarUsuarioViewModel, TokenViewModel }
 @Injectable()
 
 export class AuthService {
+
+
     private apiUrl: string = environment.apiUrl;
 
     constructor(private http: HttpClient) { }
@@ -22,6 +24,16 @@ export class AuthService {
         const urlCompleto = `${this.apiUrl}/contas/autenticar`;
 
         return this.http.post<TokenViewModel>(urlCompleto, loginUsuario).pipe(map(this.processarDados))
+    }
+
+    public logout() {
+        const urlCompleto = `${this.apiUrl}/contas/sair`;
+
+        return this.http.post(urlCompleto, {});
+    }
+
+    public validarExpiracaoToken(dataExpiracao: Date): boolean {
+        return dataExpiracao > new Date(); //pega a data atual
     }
 
     private processarDados(resposta: any): TokenViewModel {
