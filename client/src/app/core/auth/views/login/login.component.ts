@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
-import { AutenticarUsuarioViewModel } from '../../models/auth.models';
+import { AutenticarUsuarioViewModel, TokenViewModel } from '../../models/auth.models';
 import { AuthService } from '../../services/auth.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -75,11 +75,24 @@ export class LoginComponent {
 
     const loginUsuario: AutenticarUsuarioViewModel = this.form.value;
 
-    this.authService.login(loginUsuario).subscribe((res) => {
-      this.usuarioService.logarUsuario(res.usuario);
-      this.localStorageService.salvarTokenAutenticacao(res);
+    const observer = {
+      next: (res: TokenViewModel) => this.processarSucesso(res),
+      error: (erro: Error) => this.processarFalha(erro)
+    }
 
-      this.router.navigate(['/dashboard']);
-    })
+    this.authService
+      .login(loginUsuario)
+      .subscribe(observer)
+  }
+
+  private processarSucesso(res: TokenViewModel) {
+    this.usuarioService.logarUsuario(res.usuario);
+    this.localStorageService.salvarTokenAutenticacao(res);
+
+    this.router.navigate(['/dashboard']);
+  }
+
+  private processarFalha(err: Error) {
+    console.log(err.message);
   }
 }
