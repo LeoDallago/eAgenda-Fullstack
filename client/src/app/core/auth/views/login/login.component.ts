@@ -70,6 +70,7 @@ export class LoginComponent {
 
   public entrar() {
     if (this.form.invalid) {
+
       return;
     }
 
