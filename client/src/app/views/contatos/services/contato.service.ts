@@ -14,7 +14,6 @@ export class ContatoService {
 
   constructor(
     private http: HttpClient,
-    private localStorageService: LocalStorageService
   ) { }
 
 
