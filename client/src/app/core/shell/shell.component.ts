@@ -58,6 +58,11 @@ export class ShellComponent {
       titulo: 'Contatos',
       icone: 'people',
       rota: '/contatos',
+    },
+    {
+      titulo: 'Compromissos',
+      icone: 'notes',
+      rota: '/compromissos'
     }
   ];
 

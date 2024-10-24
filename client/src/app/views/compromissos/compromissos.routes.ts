@@ -2,7 +2,7 @@ import { ActivatedRouteSnapshot, ResolveEnd, ResolveFn, Routes } from "@angular/
 import { ListarCompromissoViewModel, VisualizarCompromissoViewModel } from "./models/compromisso.model";
 import { inject } from "@angular/core";
 import { CompromissosService } from "./service/compromissos.service";
-import { ListarCompromissosComponent } from "./listar/listar-compromissos/listar-compromissos.component";
+import { ListarCompromissosComponent } from "./listar/listar-compromissos.component";
 import { CadastrarCompromissosComponent } from "./cadastrar/cadastrar-compromissos/cadastrar-compromissos.component";
 import { EditarCompromissosComponent } from "./editar/editar-compromissos/editar-compromissos.component";
 import { ExcluirCompromissosComponent } from "./excluir/excluir-compromissos/excluir-compromissos.component";
