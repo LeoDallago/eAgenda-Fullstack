@@ -6,8 +6,8 @@
             <form [formGroup]="form" (submit)="gravar()">
                 <mat-form-field class="w-100 mt-5" appearance="fill">
                     <mat-label>Nome</mat-label>
-                    <input matInput formControlName="nome" autocomplete="name" placeholder="Ex: João da Silva"
-                        [maxLength]="30" />
+                    <input matInput formControlName="nome" data-cy="nome" autocomplete="name"
+                        placeholder="Ex: João da Silva" [maxLength]="30" />
                     <mat-icon matSuffix color="primary">person</mat-icon>
                     <mat-error class="text-white" *ngIf="nome?.invalid">
                         <span *ngIf="nome?.errors?.['required']">O nome precisa ser preenchido.</span>
@@ -17,7 +17,7 @@
 
                 <mat-form-field class="w-100 mt-3" appearance="fill">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" type="email" autocomplete="email"
+                    <input matInput formControlName="email" data-cy="email" type="email" autocomplete="email"
                         placeholder="Ex: joaosilva@gmail.com" />
                     <mat-icon matSuffix color="primary">mail</mat-icon>
                     <mat-error class="text-white" *ngIf="email?.invalid">
@@ -27,7 +27,7 @@
                 </mat-form-field>
                 <mat-form-field class="w-100 mt-3" appearance="fill">
                     <mat-label>Telefone</mat-label>
-                    <input matInput formControlName="telefone" autocomplete="tel-national"
+                    <input matInput formControlName="telefone" data-cy="telefone" autocomplete="tel-national"
                         placeholder="Ex: (00) 90000-0000" />
                     <mat-icon matSuffix color="primary">phone</mat-icon>
                     <mat-error class="text-white" *ngIf="telefone?.invalid">
@@ -38,18 +38,18 @@
                 </mat-form-field>
                 <mat-form-field class="w-100 mt-3" appearance="fill">
                     <mat-label>Empresa</mat-label>
-                    <input matInput formControlName="empresa" autocomplete="organization"
+                    <input matInput formControlName="empresa" data-cy="empresa" autocomplete="organization"
                         placeholder="Ex: Academia do Programador" [maxLength]="30" />
                     <mat-icon matSuffix color="primary">corporate_fare</mat-icon>
                     <mat-error class="text-white" *ngIf="empresa?.invalid">
                         <span *ngIf="empresa?.errors?.['required']">A empresa precisa ser preenchida.</span>
-                        <span *ngIf="empresa?.errors?.['minlength']" edicao-contato.component.ts|html :>A empresa deve
+                        <span *ngIf="empresa?.errors?.['minlength']">A empresa deve
                             conter ao menos 3 caracteres.</span>
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="w-100 mt-3" appearance="fill">
                     <mat-label>Cargo</mat-label>
-                    <input matInput formControlName="cargo" autocomplete="organization-title"
+                    <input matInput formControlName="cargo" data-cy="cargo" autocomplete="organization-title"
                         placeholder="Ex: Professor" [maxLength]="30" />
                     <mat-icon matSuffix color="primary">work</mat-icon>
                     <mat-error class="text-white" *ngIf="cargo?.invalid">
@@ -58,7 +58,7 @@
                     </mat-error>
                 </mat-form-field>
                 <div class="row justify-content-end g-2 gap-2 mt-3">
-                    <button type="submit" mat-flat-button class="col-sm-4">
+                    <button type="submit" data-cy="submit" mat-flat-button class="col-sm-4">
                         <mat-icon matIconPrefix>check</mat-icon>
                         Gravar
                     </button>

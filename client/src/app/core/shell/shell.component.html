@@ -28,15 +28,15 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button *ngIf="isHandset$ | async" mat-icon-button aria-label="Ativar barra lateral" type="button"
-        (click)="drawer.toggle()">
+      <button *ngIf="isHandset$ | async" mat-icon-button aria-label="Ativar barra lateral" data-cy="menuHamburguer"
+        type="button" (click)="drawer.toggle()">
         <mat-icon aria-label="Ícone ativador da barra lateral">menu</mat-icon>
       </button>
 
       <span *ngIf="usuarioAutenticado">
         <span>Bem-vindo {{usuarioAutenticado.nome}}</span>
 
-        <button (click)="logoutEfetuado()" mat-stroked-button>
+        <button (click)="logoutEfetuado()" mat-stroked-button data-cy="logout">
           Logout
         </button>
       </span>
