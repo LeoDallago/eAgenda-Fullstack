@@ -32,3 +32,15 @@ mat-error {
     background-color: #ffa8a8 !important;
     color: #6f4b4b !important;
 }
+
+.notificacao-sucesso {
+    --mdc-snackbar-container-color: #ffabf3;
+    --mdc-snackbar-supporting-text-color: #131313;
+    --mat-snack-bar-button-color: #131313;
+}
+
+.notificacao-erro {
+    --mdc-snackbar-container-color: #dd4f4f;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+    --mat-snack-bar-button-color: #ffffff;
+}

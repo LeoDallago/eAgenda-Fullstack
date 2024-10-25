@@ -1,0 +1,92 @@
+<main class="container my-5">
+    <div class="row justify-content-center g-3 mt-2">
+        <div class="col col-md-10 col-lg-6">
+            <h1 class="fs-1">Cadastro de Compromisso</h1>
+            <hr />
+            <form [formGroup]="form" (submit)="gravar()">
+                <mat-form-field class="w-100 mt-5" appearance="fill">
+                    <mat-label>Assunto</mat-label>
+                    <input matInput formControlName="assunto" data-cy="assunto" placeholder="Ex: Lavar o cachorro"
+                        [maxLength]="30" />
+                    <mat-icon matSuffix color="primary">task</mat-icon>
+                    <mat-error class="text-white" *ngIf="assunto?.invalid">
+                        <span *ngIf="assunto?.errors?.['required']">O assunto precisa ser preenchido.</span>
+                        <span *ngIf="assunto?.errors?.['minlength']">O assunto deve conter ao menos 3 caracteres.</span>
+                        <span *ngIf="assunto?.errors?.['maxLength']">O assunto deve conter ao maximo 50
+                            caracteres.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 mt-3" appearance="fill">
+                    <mat-label>Data</mat-label>
+                    <input matInput formControlName="data" data-cy="data" type="date" />
+                    <mat-icon matSuffix color="primary">calendar_month</mat-icon>
+                    <mat-error class="text-white" *ngIf="data?.invalid">
+                        <span *ngIf="data?.errors?.['required']">A data precisa ser preenchida.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 mt-3" appearance="fill">
+                    <mat-label>Inicio</mat-label>
+                    <input matInput formControlName="horaInicio" data-cy="horaInicio" type="time"
+                        placeholder="Ex: 12:00" />
+                    <mat-icon matSuffix color="primary">schedule</mat-icon>
+                    <mat-error class="text-white" *ngIf="horaInicio?.invalid">
+                        <span *ngIf="horaInicio?.errors?.['required']">A hora de inicio precisa ser preenchida.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 mt-3" appearance="fill">
+                    <mat-label>Termino</mat-label>
+                    <input matInput formControlName="horaTermino" data-cy="horaTermino" type="time"
+                        placeholder="Ex: 13:00" [maxLength]="30" />
+                    <mat-icon matSuffix color="primary">schedule</mat-icon>
+                    <mat-error class="text-white" *ngIf="horaTermino?.invalid">
+                        <span *ngIf="horaTermino?.errors?.['required']">A hora de termino precisa ser preenchida.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 mt-3" appearance="fill">
+                    <mat-label>Local</mat-label>
+                    <input matInput formControlName="local" data-cy="local" placeholder="Ex: Remoto" [maxLength]="30" />
+                    <mat-icon matSuffix color="primary">work</mat-icon>
+                    <mat-error class="text-white" *ngIf="local?.invalid">
+                        <span *ngIf="local?.errors?.['required']">O local precisa ser preenchido.</span>
+                        <span *ngIf="local?.errors?.['minlength']">O local deve conter ao menos 3 caracteres.</span>
+                        <span *ngIf="local?.errors?.['maxLength']">O local deve conter ao maximo 20 caracteres.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 mt-3" appearance="fill">
+                    <mat-label>Link</mat-label>
+                    <input matInput formControlName="link" data-cy="link" placeholder="Ex: https://www.google.com"
+                        [maxLength]="30" />
+                    <mat-icon matSuffix color="primary">link</mat-icon>
+                    <mat-error class="text-white" *ngIf="link?.invalid">
+                        <span *ngIf="link?.errors?.['required']">O link precisa ser preenchido.</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 mt-3" appearance="fill">
+                    <mat-label>Contato</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let item of contatos | async"
+                            value="{{item.nome}}">{{item.nome}}</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix color="primary">person</mat-icon>
+                </mat-form-field>
+
+                <div class="row justify-content-end g-2 gap-2 mt-3">
+                    <button type="submit" data-cy="submit" mat-flat-button class="col-sm-4">
+                        <mat-icon matIconPrefix>check</mat-icon>
+                        Gravar
+                    </button>
+                    <a mat-button type="button" class="col-sm-4" routerLink="/compromissos/listar">
+                        <mat-icon matIconPrefix>keyboard_return</mat-icon>
+                        Voltar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

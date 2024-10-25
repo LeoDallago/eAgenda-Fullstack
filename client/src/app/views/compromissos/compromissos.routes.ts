@@ -3,9 +3,9 @@ import { ListarCompromissoViewModel, VisualizarCompromissoViewModel } from "./mo
 import { inject } from "@angular/core";
 import { CompromissosService } from "./service/compromissos.service";
 import { ListarCompromissosComponent } from "./listar/listar-compromissos.component";
-import { CadastrarCompromissosComponent } from "./cadastrar/cadastrar-compromissos/cadastrar-compromissos.component";
-import { EditarCompromissosComponent } from "./editar/editar-compromissos/editar-compromissos.component";
-import { ExcluirCompromissosComponent } from "./excluir/excluir-compromissos/excluir-compromissos.component";
+import { CadastrarCompromissosComponent } from "./cadastrar/cadastrar-compromissos.component";
+import { EditarCompromissosComponent } from "./editar/editar-compromissos.component";
+import { ExcluirCompromissosComponent } from "./excluir/excluir-compromissos.component";
 
 
 const listagemCompromissosResolver: ResolveFn<ListarCompromissoViewModel[]> = () => {
@@ -31,12 +31,12 @@ export const compromissosRoutes: Routes = [
 
     {
         path: 'editar/:id', component: EditarCompromissosComponent, resolve: {
-            compromissos: visualizarCompromissoResolver
+            compromisso: visualizarCompromissoResolver
         }
     },
     {
         path: 'excluir/:id', component: ExcluirCompromissosComponent, resolve: {
-            compromissos: visualizarCompromissoResolver
+            compromisso: visualizarCompromissoResolver
         }
     }
 ]

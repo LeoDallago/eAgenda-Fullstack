@@ -31,18 +31,18 @@ export class CompromissosService {
   excluir(id: string): Observable<CompromissoExcluidoViewModel> {
     const urlComleto = `${this.url}/${id}`
     return this.http.delete<ContatoExcluidoViewModel>(urlComleto)
-      .pipe(map(this.processarDados), catchError(this.processarFalha), delay(2000))
+      .pipe(map(this.processarDados), catchError(this.processarFalha))
   }
 
   selecionarTodos(): Observable<ListarCompromissoViewModel[]> {
     return this.http.get<ListarCompromissoViewModel[]>(this.url)
-      .pipe(map(this.processarDados), catchError(this.processarFalha), delay(2000))
+      .pipe(map(this.processarDados), catchError(this.processarFalha))
   }
 
   selecionarPorId(id: string): Observable<VisualizarCompromissoViewModel> {
     const urlComleto = `${this.url}/visualizacao-completa/${id}`
     return this.http.get<VisualizarCompromissoViewModel>(urlComleto)
-      .pipe(map(this.processarDados), catchError(this.processarFalha), delay(2000))
+      .pipe(map(this.processarDados), catchError(this.processarFalha))
   }
 
   private processarDados(resposta: any) {
