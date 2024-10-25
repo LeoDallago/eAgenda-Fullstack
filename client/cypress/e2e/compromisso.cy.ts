@@ -23,6 +23,8 @@ describe('Processos de compromissos', () => {
     it('Deve acessar pagina de LISTAGEM compromissos', () => {
         cy.visit('/compromissos/listar');
 
+        cy.wait(2000)
+
         cy.contains('Listagem de Compromissos')
     })
 
@@ -30,5 +32,25 @@ describe('Processos de compromissos', () => {
         cy.visit('/compromissos/cadastrar')
 
         cy.contains('Cadastro de Compromisso')
+    })
+
+    context('Validação de campos', () => {
+        it('Deve notificar sobre campo VAZIO', () => {
+            cy.visit('/compromissos/cadastrar')
+
+            cy.get('[data-cy=assunto]')
+            cy.get('[data-cy=submit]').click()
+
+            cy.contains('O assunto precisa ser preenchido.')
+        })
+
+        it('Deve notificar sobre tamanho MINIMO', () => {
+            cy.visit('/compromissos/cadastrar')
+
+            cy.get('[data-cy=assunto]').type('t')
+            cy.get('[data-cy=submit]').click()
+
+            cy.contains('O assunto deve conter ao menos 3 caracteres.')
+        })
     })
 })
