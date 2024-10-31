@@ -18,7 +18,7 @@ export class DashboardComponent {
     { rota: '/contatos', texto: 'Contatos', icone: 'people' },
 
     { rota: '/compromissos', texto: 'Compromissos', icone: 'event' },
-    { rota: '/despesas', texto: 'Despesas', icone: 'currency_exchange' },
+    { rota: '/excluir', texto: 'Despesas', icone: 'currency_exchange' },
     { rota: '/tarefas', texto: 'Tarefas', icone: 'task_alt' },
   ];
 }

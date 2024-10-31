@@ -9,7 +9,7 @@ import { ListagemContatosComponent } from '../contatos/listar/listagem-contatos.
 import { ListarDespesasComponent } from './listar/listar-despesas.component';
 import { CadastrarDespesasComponent } from './cadastrar/cadastrar-despesas.component';
 import { EditarDespesasComponent } from './editar/editar-despesas.component';
-import { ExcluirDespesasComponent } from './despesas/excluir-despesas.component';
+import { ExcluirDespesasComponent } from './excluir/excluir-despesas.component';
 
 
 const listagemDespesasResolver: ResolveFn<ListarDespesasViewModel[]> = ()=>{

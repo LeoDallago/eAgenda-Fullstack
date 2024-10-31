@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-editar-despesas',
+  selector: 'app-editar-excluir',
   standalone: true,
   imports: [],
   templateUrl: './editar-despesas.component.html',

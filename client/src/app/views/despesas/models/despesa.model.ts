@@ -3,7 +3,7 @@ export interface InserirDespesaViewModel{
   valor: number,
   data: string,
   formaPagamento: number,
-  categoriaSelecionadas: string[],
+  categoriasSelecionadas: string[],
 }
 
 export interface DespesaInseridaViewModel {
@@ -12,7 +12,7 @@ export interface DespesaInseridaViewModel {
   valor: number,
   data: string,
   formaPagamento: number,
-  categoriaSelecionadas: string[],
+  categoriasSelecionadas: string[],
 }
 
 export interface EditarDespesaViewModel {
@@ -20,7 +20,7 @@ export interface EditarDespesaViewModel {
   valor: number,
   data: string,
   formaPagamento: number,
-  categoriaSelecionadas: string[],
+  categoriasSelecionadas: string[],
 }
 
 export interface DespesaEditadaViewModel {
@@ -29,7 +29,7 @@ export interface DespesaEditadaViewModel {
   valor: number,
   data: string,
   formaPagamento: number,
-  categoriaSelecionadas: string[],
+  categoriasSelecionadas: string[],
 }
 
 export interface DespesaExcluidaViewModel {}
@@ -48,5 +48,5 @@ export interface VisualizarDespesaViewModel {
   valor: number,
   data: string,
   formaPagamento: string,
-  categoriaSelecionadas: string[],
+  categoriasSelecionadas: string[],
 }
