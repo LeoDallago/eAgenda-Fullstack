@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { VisualizarCategoriaViewModel } from '../models/categoria.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TarefasService } from '../service/tarefas.service';
+import { CategoriasService } from '../service/categorias.service';
 import { NotificacaoService } from '../../../core/notificacao/notificacao.service';
-import { VisualizarTarefaViewModel } from '../models/tarefa.model';
 import { MatAnchor, MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-excluir-tarefas',
+  selector: 'app-excluir-categorias',
   standalone: true,
   imports: [
     MatAnchor,
@@ -20,37 +20,35 @@ import { MatIcon } from '@angular/material/icon';
     MatIcon,
     RouterLink
   ],
-  templateUrl: './excluir-tarefas.component.html',
+  templateUrl: './excluir-categorias.component.html',
 })
-export class ExcluirTarefasComponent implements OnInit {
-detalhesTarefa?: VisualizarTarefaViewModel;
+export class ExcluirCategoriasComponent  implements OnInit {
+  detalhesCategoria?:  VisualizarCategoriaViewModel;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private tarefaService: TarefasService,
-    private notificacaoService: NotificacaoService
-  ) {
-  }
+    private categoriaService: CategoriasService,
+    private notifcacao: NotificacaoService,
+  ) {}
 
   ngOnInit(): void {
-      this.detalhesTarefa = this.route.snapshot.data['tarefa']
-  }
+        this.detalhesCategoria = this.route.snapshot.data['categoria'];
+    }
 
   public excluir() {
-    this.tarefaService.excluir(this.detalhesTarefa!.id).subscribe({
+    this.categoriaService.excluir(this.detalhesCategoria!.id).subscribe({
       next: () => this.processarSucesso(),
       error: (erro) => this.processarFalha(erro),
     })
   }
 
   private processarSucesso(): void {
-    this.notificacaoService.sucesso('Tarefa excluida com sucesso')
-
-    this.router.navigate(['/tarefas/listar']);
+    this.notifcacao.sucesso('Categoria excluida com sucesso')
+    this.router.navigate(['/categorias/listar']);
   }
 
   private processarFalha(erro: Error) {
-    this.notificacaoService.erro(erro.toString())
+    this.notifcacao.erro(erro.toString())
   }
 }

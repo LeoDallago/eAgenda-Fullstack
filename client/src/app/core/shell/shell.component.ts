@@ -68,6 +68,11 @@ export class ShellComponent {
       titulo:'Tarefas',
       icone: 'task',
       rota: '/tarefas'
+    },
+    {
+      titulo:'Categorias',
+      icone: 'category',
+      rota: '/categorias'
     }
   ];
 

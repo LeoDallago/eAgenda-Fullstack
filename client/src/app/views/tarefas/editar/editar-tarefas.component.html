@@ -1,1 +1,69 @@
-<p>editar-tarefas works!</p>
+<main class="container my-5">
+  <div class="row justify-content-center g-3 mt-2">
+    <div class="col col-md-10 col-lg-6">
+      <h1 class="fs-1">Editar de Tarefa</h1>
+      <hr />
+      <form [formGroup]="form" (submit)="gravar()">
+        <mat-form-field class="w-100 mt-5" appearance="fill">
+          <mat-label>Titulo</mat-label>
+          <input matInput formControlName="titulo" data-cy="titulo" placeholder="Ex: Lavar o cachorro"
+                 [maxLength]="30" />
+          <mat-icon matSuffix color="primary">task</mat-icon>
+          <mat-error class="text-white" *ngIf="titulo?.invalid">
+            <span *ngIf="titulo?.errors?.['required']">O assunto precisa ser preenchido.</span>
+            <span *ngIf="titulo?.errors?.['minlength']">O assunto deve conter ao menos 3 caracteres.</span>
+            <span *ngIf="titulo?.errors?.['maxLength']">O assunto deve conter ao maximo 50 caracteres.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Prioridade</mat-label>
+          <mat-select formControlName="prioridade" data-cy="prioridade">
+            <mat-option [value]= "0">Baixinha</mat-option>
+            <mat-option [value]= "1">Normal</mat-option>
+            <mat-option [value]= "2">Altissima</mat-option>
+          </mat-select>
+          <mat-icon matSuffix color="primary">calendar_month</mat-icon>
+          <mat-error class="text-white" *ngIf="prioridade?.invalid">
+            <span *ngIf="prioridade?.errors?.['required']">A prioridade precisa ser preenchida.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Itens</mat-label>
+          <input matInput #itemInput data-cy="itens" type="text"
+                 placeholder="Balde" />
+          <button type="button" matSuffix mat-mini-fab class="m-2 botao-editar" (click)="adicionarItem(itemInput.value)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-divider></mat-divider>
+
+        <mat-chip-set *ngIf="itens.length > 0;" class="p-3">
+          <mat-label class="col-12 mb-2">Itens Adicionados</mat-label>
+          <mat-chip *ngFor="let item of itens.controls; let i = index">
+            {{item.value.titulo}}
+
+            <button matChipRemove (click)="removerItem(i)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+        </mat-chip-set>
+
+        <mat-divider></mat-divider>
+
+        <div class="row justify-content-end g-2 gap-2 mt-3">
+          <button type="submit" data-cy="submit" mat-flat-button class="col-sm-4">
+            <mat-icon matIconPrefix>check</mat-icon>
+            Gravar
+          </button>
+          <a mat-button type="button" class="col-sm-4" routerLink="/tarefas/listar">
+            <mat-icon matIconPrefix>keyboard_return</mat-icon>
+            Voltar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

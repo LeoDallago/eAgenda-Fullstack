@@ -1,27 +1,27 @@
 export interface InserirTarefaViewModel {
     titulo: string,
     prioridade: number,
-    //itens:string,
+    itens:string,
 }
 
 export interface TarefaInseridaViewModel {
     id: string,
     titulo: string,
     prioridade: number,
-    //itens:string,
+    itens:string,
 }
 
 export interface EditarTarefaViewModel {
     titulo: string,
     prioridade: number,
-    //itens:string,
+    itens:string,
 }
 
 export interface TarefaEditadaViewModel {
     id: string,
     titulo: string,
     prioridade: number,
-    //itens:string,
+    itens:string,
 }
 
 export interface TarefaExcluidaViewModel { }
@@ -32,7 +32,7 @@ export interface ListarTarefaViewModel {
     prioridade: string,
     dataCriacao: string,
     dataConclusao: string,
-    //itens:string,
+    itens:string,
 }
 
 export interface VisualizarTarefaViewModel {
@@ -41,5 +41,11 @@ export interface VisualizarTarefaViewModel {
     prioridade: string,
     dataCriacao: string,
     dataConclusao: string,
-    //itens:string,
+    itens:VisualizarItensViewModel[],
+}
+
+export interface VisualizarItensViewModel{
+  titulo: string,
+  status: number,
+  concluido: boolean
 }

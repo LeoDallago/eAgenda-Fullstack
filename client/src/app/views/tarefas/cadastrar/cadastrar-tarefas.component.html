@@ -10,9 +10,9 @@
                  [maxLength]="30" />
           <mat-icon matSuffix color="primary">task</mat-icon>
           <mat-error class="text-white" *ngIf="titulo?.invalid">
-            <span *ngIf="titulo?.errors?.['required']">O assunto precisa ser preenchido.</span>
-            <span *ngIf="titulo?.errors?.['minlength']">O assunto deve conter ao menos 3 caracteres.</span>
-            <span *ngIf="titulo?.errors?.['maxLength']">O assunto deve conter ao maximo 50 caracteres.</span>
+            <span *ngIf="titulo?.errors?.['required']">O titulo precisa ser preenchido.</span>
+            <span *ngIf="titulo?.errors?.['minlength']">O titulo deve conter ao menos 3 caracteres.</span>
+            <span *ngIf="titulo?.errors?.['maxLength']">O titulo deve conter ao maximo 50 caracteres.</span>
           </mat-error>
         </mat-form-field>
 
@@ -31,10 +31,29 @@
 
         <mat-form-field class="w-100 mt-3" appearance="fill">
           <mat-label>Itens</mat-label>
-          <input matInput formControlName="itens" data-cy="itens" type="text"
+          <input matInput #itemInput data-cy="itens" type="text"
                  placeholder="Balde" />
-          <mat-icon matSuffix color="primary">schedule</mat-icon>
+          <button type="button" matSuffix mat-mini-fab class="m-2 botao-editar" (click)="adicionarItem(itemInput.value)">
+            <mat-icon>add</mat-icon>
+          </button>
         </mat-form-field>
+
+        <mat-divider></mat-divider>
+
+        <mat-chip-set *ngIf="itens.length > 0;" class="p-3">
+          <mat-label class="col-12 mb-2">Itens Adicionados</mat-label>
+          <mat-chip *ngFor="let item of itens.controls; let i = index">
+            {{item.value.titulo}}
+
+            <button matChipRemove (click)="removerItem(i)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+
+        </mat-chip-set>
+
+        <mat-divider></mat-divider>
+
 
 
         <div class="row justify-content-end g-2 gap-2 mt-3">
