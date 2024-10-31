@@ -9,6 +9,7 @@ import { contatosRoutes } from './views/contatos/contatos.routes';
 import { compromissosRoutes } from './views/compromissos/compromissos.routes';
 import { tarefasRoutes } from './views/tarefas/tarefas.routes';
 import { categoriaRoutes } from './views/categorias/categorias.routes';
+import { despesaRoutes } from './views/despesas/despesas.routes';
 
 const authGuard: CanMatchFn = (): Observable<boolean | UrlTree> => {
 
@@ -43,5 +44,6 @@ export const routes: Routes = [
     { path: 'contatos', children: contatosRoutes },
     { path: 'compromissos', children: compromissosRoutes },
     { path: 'tarefas', children: tarefasRoutes },
-  { path: 'categorias', children: categoriaRoutes},
+    { path: 'categorias', children: categoriaRoutes},
+    { path: 'despesas', children: despesaRoutes }
 ]

@@ -73,6 +73,11 @@ export class ShellComponent {
       titulo:'Categorias',
       icone: 'category',
       rota: '/categorias'
+    },
+    {
+      titulo: 'Despesas',
+      icone: 'paid',
+      rota: '/despesas'
     }
   ];
 
