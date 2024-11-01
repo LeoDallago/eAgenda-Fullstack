@@ -1,1 +1,92 @@
-<p>editar-despesas works!</p>
+<main class="container my-5">
+  <div class="row justify-content-center g-3 mt-2">
+    <div class="col col-md-10 col-lg-6">
+      <h1 class="fs-1">Editar de Despesa</h1>
+      <hr />
+      <form [formGroup]="form" (submit)="gravar()">
+        <mat-form-field class="w-100 mt-5" appearance="fill">
+          <mat-label>Descricao</mat-label>
+          <input matInput formControlName="descricao" data-cy="descricao" placeholder="Ex: Lavar o cachorro"
+                 [maxLength]="30" />
+          <mat-icon matSuffix color="primary">task</mat-icon>
+          <mat-error class="text-white" *ngIf="descricao?.invalid">
+            <span *ngIf="descricao?.errors?.['required']">A descricao precisa ser preenchida.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Valor</mat-label>
+          <input matInput formControlName="valor" data-cy="valor" type="number" />
+          <mat-icon matSuffix color="primary">attach_money</mat-icon>
+          <mat-error class="text-white" *ngIf="valor?.invalid">
+            <span *ngIf="valor?.errors?.['required']">o valor precisa ser preenchido.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Data</mat-label>
+          <input matInput formControlName="data" data-cy="data" type="date"
+                 placeholder="11/11/2024" />
+          <mat-icon matSuffix color="primary">calendar_month</mat-icon>
+          <mat-error class="text-white" *ngIf="data?.invalid">
+            <span *ngIf="data?.errors?.['required']">A data precisa ser preenchida.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Forma de Pagamento</mat-label>
+          <mat-select formControlName="formaPagamento" data-cy="formaPagamento">
+            <mat-option [value]= "0">PIX</mat-option>
+            <mat-option [value]= "1">Dinheiro</mat-option>
+            <mat-option [value]= "2">Cartão</mat-option>
+          </mat-select>
+          <mat-icon matSuffix color="primary">payments</mat-icon>
+          <mat-error class="text-white" *ngIf="formaPagamento?.invalid">
+            <span *ngIf="formaPagamento?.errors?.['required']">A forma de pagamento precisa ser preenchida.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Categorias</mat-label>
+          <mat-select multiple formControlName="categoriasSelecionadas">
+            <mat-option *ngFor="let item of categorias | async" value="{{item.id}}">
+              {{item.titulo}}
+
+<!--              <button type="button" matSuffix mat-mini-fab class="m-2 botao-editar">
+                <mat-icon>add</mat-icon>
+              </button>-->
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix color="primary">attach_money</mat-icon>
+        </mat-form-field>
+
+        <mat-divider></mat-divider>
+
+        <mat-chip-set *ngIf="categoriasSelecionadas.length > 0;" class="p-3">
+          <mat-label class="col-12 mb-2">Categorias Selecionadas</mat-label>
+          <mat-chip *ngFor="let item of categoriasSelecionadas.value; let i = index">
+            {{item}}
+
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+
+        </mat-chip-set>
+
+        <mat-divider></mat-divider>
+
+        <div class="row justify-content-end g-2 gap-2 mt-3">
+          <button type="submit" data-cy="submit" mat-flat-button class="col-sm-4">
+            <mat-icon matIconPrefix>check</mat-icon>
+            Gravar
+          </button>
+          <a mat-button type="button" class="col-sm-4" routerLink="/despesas/listar">
+            <mat-icon matIconPrefix>keyboard_return</mat-icon>
+            Voltar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

@@ -77,7 +77,7 @@ export class ShellComponent {
     {
       titulo: 'Despesas',
       icone: 'paid',
-      rota: '/excluir'
+      rota: '/despesas'
     }
   ];
 

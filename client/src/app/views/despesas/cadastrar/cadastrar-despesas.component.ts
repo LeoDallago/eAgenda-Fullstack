@@ -1,18 +1,22 @@
-import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { DespesasService } from '../service/despesas.service';
 import { NotificacaoService } from '../../../core/notificacao/notificacao.service';
-import { PartialObserver } from 'rxjs';
+import { Observable, PartialObserver } from 'rxjs';
 import { DespesaInseridaViewModel } from '../models/despesa.model';
 import { CompromissoInseridoViewModel } from '../../compromissos/models/compromisso.model';
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
-import { MatAnchor, MatButton } from '@angular/material/button';
+import { MatAnchor, MatButton, MatMiniFabButton } from '@angular/material/button';
 import { MatError, MatFormField, MatLabel, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
+import { CategoriasService } from '../../categorias/service/categorias.service';
+import { ListarCategoriaViewModel } from '../../categorias/models/categoria.model';
+import { MatChip, MatChipRemove, MatChipSet } from '@angular/material/chips';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'app-cadastrar-excluir',
@@ -33,17 +37,24 @@ import { MatSelect } from '@angular/material/select';
     NgForOf,
     NgIf,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    MatMiniFabButton,
+    MatChip,
+    MatChipRemove,
+    MatChipSet,
+    MatDivider
   ],
   templateUrl: './cadastrar-despesas.component.html',
 })
-export class CadastrarDespesasComponent {
+export class CadastrarDespesasComponent implements OnInit{
   public form: FormGroup;
+  public categorias?: Observable<ListarCategoriaViewModel[]>
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private despesaService: DespesasService,
+    private categoriaService: CategoriasService,
     private notificacaoService: NotificacaoService,
   ) {
     this.form = this.fb.group({
@@ -54,6 +65,10 @@ export class CadastrarDespesasComponent {
       categoriasSelecionadas: this.fb.array([])
     })
   }
+
+  ngOnInit(): void {
+        this.categorias = this.categoriaService.selecionarTodos()
+    }
 
   get descricao() {
     return this.form.get('descricao')
@@ -74,7 +89,15 @@ export class CadastrarDespesasComponent {
   get categoriasSelecionadas(){
     return this.form.get('categoriasSelecionadas') as FormArray
   }
-//todo fazer parte de categorias
+
+  adicionarCategoria(categoria: ListarCategoriaViewModel) {
+      this.categoriasSelecionadas.push(new FormControl(categoria.id));
+  }
+
+  removerCategoria(index: number){
+    this.categoriasSelecionadas.removeAt(index)
+  }
+
   public gravar(){
     if(this.form.invalid){
       return;
@@ -99,4 +122,5 @@ export class CadastrarDespesasComponent {
   private processarFalha(erro: any) {
     this.notificacaoService.erro(erro);
   }
+
 }

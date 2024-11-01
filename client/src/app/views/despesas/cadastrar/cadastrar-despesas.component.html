@@ -48,9 +48,33 @@
 
         <mat-form-field class="w-100 mt-3" appearance="fill">
           <mat-label>Categorias</mat-label>
-          <input matInput formControlName="categoriasSelecionadas" data-cy="categoriasSelecionadas" type="text" />
+          <mat-select>
+            <mat-option *ngFor="let item of categorias | async" value="{{item.titulo}}">
+              {{item.titulo}}
+
+              <button type="button" matSuffix mat-mini-fab class="m-2 botao-editar" (click)="adicionarCategoria(item)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-option>
+          </mat-select>
           <mat-icon matSuffix color="primary">attach_money</mat-icon>
         </mat-form-field>
+
+        <mat-divider></mat-divider>
+
+        <mat-chip-set *ngIf="categoriasSelecionadas.length > 0;" class="p-3">
+          <mat-label class="col-12 mb-2">Categorias Selecionadas</mat-label>
+          <mat-chip *ngFor="let item of categoriasSelecionadas.controls; let i = index">
+            {{item.value}}
+
+            <button matChipRemove (click)="removerCategoria(i)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+
+        </mat-chip-set>
+
+        <mat-divider></mat-divider>
 
         <div class="row justify-content-end g-2 gap-2 mt-3">
           <button type="submit" data-cy="submit" mat-flat-button class="col-sm-4">

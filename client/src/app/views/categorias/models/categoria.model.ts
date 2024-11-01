@@ -26,5 +26,4 @@ export interface ListarCategoriaViewModel {
 export interface VisualizarCategoriaViewModel {
   id: string,
   titulo: string,
-  //todo inplementar excluir
 }
