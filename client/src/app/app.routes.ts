@@ -37,13 +37,53 @@ const authUserGuard: CanMatchFn = (): Observable<boolean | UrlTree> => {
 
 export const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: DashboardComponent, canMatch: [authGuard] },
-    { path: 'registro', component: RegistroComponent, canMatch: [authUserGuard] },
-    { path: 'login', component: LoginComponent, canMatch: [authUserGuard] },
+    {
+      path: 'dashboard',
+      loadComponent: () => import('./views/dashboard/dashboard.component')
+        .then(c => c.DashboardComponent),
+      canMatch: [authGuard]
+    },
+    {
+      path: 'registro',
+      loadComponent: () => import('./core/auth/views/registro/registro.component')
+        .then((c) => c.RegistroComponent),
+      canMatch: [authUserGuard]
+    },
+    {
+      path: 'login',
+      loadComponent: () => import('./core/auth/views/login/login.component')
+        .then((c) => c.LoginComponent),
+      canMatch: [authUserGuard]
+    },
 
-    { path: 'contatos', children: contatosRoutes },
-    { path: 'compromissos', children: compromissosRoutes },
-    { path: 'tarefas', children: tarefasRoutes },
-    { path: 'categorias', children: categoriaRoutes},
-    { path: 'despesas', children: despesaRoutes }
+    {
+      path: 'contatos',
+      loadChildren: () => import('./views/contatos/contatos.routes')
+        .then((m) => m.contatosRoutes),
+      canMatch: [authGuard]
+    },
+    {
+      path: 'compromissos',
+      loadChildren: () => import('./views/compromissos/compromissos.routes')
+        .then((m) => m.compromissosRoutes),
+      canMatch: [authGuard]
+    },
+    {
+      path: 'tarefas',
+      loadChildren: () => import('./views/tarefas/tarefas.routes')
+        .then((m) => m.tarefasRoutes),
+      canMatch: [authGuard]
+    },
+    {
+      path: 'categorias',
+      loadChildren: () => import('./views/categorias/categorias.routes')
+        .then((m) => m.categoriaRoutes),
+      canMatch: [authGuard]
+    },
+    {
+      path: 'despesas',
+      loadChildren: () => import('./views/despesas/despesas.routes')
+        .then((m) => m.despesaRoutes),
+      canMatch: [authGuard]
+    }
 ]
