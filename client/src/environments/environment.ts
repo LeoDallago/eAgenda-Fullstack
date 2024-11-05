@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'https://localhost:4300/api'
+    apiUrl: 'https://delightful-mud-01ce2231e.5.azurestaticapps.net'
 };
